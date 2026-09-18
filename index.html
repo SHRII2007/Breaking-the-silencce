@@ -390,6 +390,17 @@
   .limits-list li::before{content:'—';position:absolute;left:0;color:var(--maroon);}
 
   /* ---------- MAP + GALLERY PLACEHOLDERS ---------- */
+  .state-chart{margin-top:24px;}
+  .state-row{margin-bottom:18px;}
+  .state-row .lbl{display:flex;justify-content:space-between;font-size:0.92rem;margin-bottom:6px;}
+  .state-row .lbl b{font-family:'Fraunces',serif;font-weight:600;}
+  .state-row .lbl span{color:var(--maroon);font-weight:600;}
+  .state-row.national .lbl b{color:var(--maroon);}
+  .state-bar-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden;}
+  .state-bar-fill{height:100%;width:0%;border-radius:6px;transition:width 1.2s cubic-bezier(.22,1,.36,1);background:var(--maroon);}
+  .reveal.in .state-bar-fill{width:var(--pct);}
+  .state-source{font-size:0.8rem;color:var(--ink-soft);margin-top:16px;}
+
   .map-placeholder{
     border:1.5px dashed var(--ink-soft);background:var(--paper-dim);
     padding:50px 24px;text-align:center;margin-top:24px;
@@ -782,18 +793,33 @@
       </div>
     </div>
 
-    <div class="map-placeholder">
-      <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--ink-soft);">
-        <path d="M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11z"/>
-        <circle cx="12" cy="12" r="2.4"/>
-      </svg>
-      <b>[ State-by-state hygienic product usage map — add real NFHS-5 data ]</b>
-      <p>Once you have verified state-level figures, replace this block with an India map (SVG or a Datawrapper/Flourish embed) shaded by % hygienic product usage. Cite NFHS-5 directly — don't estimate values for states you haven't verified.</p>
-      <div class="map-legend-mock">
-        <span><i style="background:var(--maroon);opacity:.3;"></i>Lower usage</span>
-        <span><i style="background:var(--maroon);opacity:.6;"></i>Mid</span>
-        <span><i style="background:var(--maroon);"></i>Higher usage</span>
+    <div class="state-chart">
+      <h3 style="font-size:1.05rem;margin-bottom:20px;">Hygienic Menstrual Product Usage — Women Aged 15–24, by State</h3>
+      <div class="state-row national">
+        <div class="lbl"><b>India (national average)</b><span>77.3%</span></div>
+        <div class="state-bar-track"><div class="state-bar-fill" style="--pct:77.3%;"></div></div>
       </div>
+      <div class="state-row">
+        <div class="lbl"><b>Kerala</b><span>95%</span></div>
+        <div class="state-bar-track"><div class="state-bar-fill" style="--pct:95%;"></div></div>
+      </div>
+      <div class="state-row">
+        <div class="lbl"><b>Maharashtra</b><span>85%</span></div>
+        <div class="state-bar-track"><div class="state-bar-fill" style="--pct:85%;"></div></div>
+      </div>
+      <div class="state-row">
+        <div class="lbl"><b>Meghalaya</b><span>65%</span></div>
+        <div class="state-bar-track"><div class="state-bar-fill" style="--pct:65%;"></div></div>
+      </div>
+      <div class="state-row">
+        <div class="lbl"><b>Madhya Pradesh</b><span>61%</span></div>
+        <div class="state-bar-track"><div class="state-bar-fill" style="--pct:61%;"></div></div>
+      </div>
+      <div class="state-row">
+        <div class="lbl"><b>Bihar</b><span>58.8%</span></div>
+        <div class="state-bar-track"><div class="state-bar-fill" style="--pct:58.8%;"></div></div>
+      </div>
+      <p class="state-source">Source: National Family Health Survey-5 (2019–21), International Institute for Population Sciences. Figures shown are the states with the highest and lowest recorded usage, plus Maharashtra for local relevance — not a comprehensive list of all states.</p>
     </div>
   </div>
 </section>
