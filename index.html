@@ -979,7 +979,7 @@
       <div class="dash-card tilt-card">
         <h3>IMPACT HIGHLIGHT</h3>
         <div class="dash-highlight" id="dashHighlight">
-          <p class="quote">Loading the most-believed myth on campus…</p>
+          <p class="quote">Several male respondents said they felt uncomfortable filling out the survey, and asked why the questions were directed at them — a response that itself points to how normalized it still is to leave boys and men out of this conversation.</p>
         </div>
       </div>
     </div>
@@ -1316,12 +1316,8 @@
       }, 20);
     }
 
-    // Card 4: Impact highlight — the single most-believed myth
-    const highlightEl = document.getElementById('dashHighlight');
-    if (highlightEl && top5 && top5.length > 0) {
-      const top = top5[0];
-      highlightEl.innerHTML = `<p class="quote"><span class="quote-pct">${top.believedPct}%</span> of respondents still believe: “${top.label}”</p>`;
-    }
+    // Card 4: Impact highlight is a fixed qualitative note (real fieldwork observation),
+    // not computed from the data — intentionally left static.
   }
 
   function loadLiveResults() {
