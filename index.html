@@ -431,6 +431,35 @@
   .lang-note{font-size:0.82rem;color:var(--ink-soft);margin-top:20px;max-width:640px;}
 
   /* ---------- LIVE RESULTS ---------- */
+  /* ---------- COMMUNITY DATA DASHBOARD ---------- */
+  .dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:10px;}
+  @media(max-width:900px){.dash-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.dash-grid{grid-template-columns:1fr;}}
+  .dash-card{border:1.5px solid var(--ink);background:var(--paper-dim);padding:24px 20px;text-align:center;min-height:230px;display:flex;flex-direction:column;}
+  .dash-card h3{font-size:0.92rem;margin-bottom:16px;color:var(--ink-soft);font-weight:600;letter-spacing:.01em;}
+  .dash-big-num{font-family:'Fraunces',serif;font-weight:700;font-size:2.6rem;color:var(--ink);line-height:1;}
+  .dash-sub{font-size:0.82rem;color:var(--ink-soft);margin-top:6px;}
+  .dash-bars{display:flex;align-items:flex-end;gap:5px;height:44px;margin:18px auto 0;justify-content:center;}
+  .dash-bars .b{width:9px;background:var(--maroon);border-radius:2px 2px 0 0;height:0%;transition:height 1s cubic-bezier(.22,1,.36,1);}
+  .reveal.in .dash-bars .b{height:var(--h);}
+  .dash-pie-wrap{margin:8px auto;position:relative;width:120px;height:120px;}
+  .dash-pie{width:120px;height:120px;border-radius:50%;background:conic-gradient(var(--line) 0 100%);transition:background 1.2s ease;}
+  .dash-legend{display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center;margin-top:12px;font-size:0.72rem;color:var(--ink-soft);}
+  .dash-legend span{display:inline-flex;align-items:center;gap:4px;}
+  .dash-legend i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .dash-donut-wrap{position:relative;width:120px;height:120px;margin:8px auto;}
+  .dash-donut-wrap svg{transform:rotate(-90deg);}
+  .dash-donut-wrap .track{fill:none;stroke:var(--line);stroke-width:14;}
+  .dash-donut-wrap .fill{fill:none;stroke:var(--maroon);stroke-width:14;stroke-linecap:round;stroke-dasharray:314;stroke-dashoffset:314;transition:stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1);}
+  .reveal.in .dash-donut-wrap .fill{stroke-dashoffset:var(--off);}
+  .dash-donut-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;}
+  .dash-highlight{flex-grow:1;display:flex;flex-direction:column;justify-content:center;}
+  .dash-highlight .quote{font-family:'Fraunces',serif;font-style:italic;font-size:0.98rem;color:var(--ink);line-height:1.4;}
+  .dash-highlight .quote-pct{color:var(--maroon);font-weight:700;font-style:normal;}
+  .dash-note{font-size:0.82rem;color:var(--ink-soft);margin-top:18px;}
+  .dash-note a{color:var(--maroon);}
+
+  /* ---------- LIVE RESULTS (existing) ---------- */
   .live-panel{border:1.5px solid var(--ink);background:var(--paper-dim);padding:32px 28px;margin-top:24px;}
   .live-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
   .live-head h3{font-size:1.05rem;}
@@ -824,25 +853,6 @@
   </div>
 </section>
 
-<section id="session">
-  <div class="wrap reveal">
-    <div class="section-head">
-      <div>
-        <span class="section-num">06B — From the session</span>
-        <h2>Our awareness session, documented.</h2>
-      </div>
-      <p>Real photos go here after your live session — with participant consent.</p>
-    </div>
-    <div class="gallery-grid stagger-grid">
-      <div class="gallery-slot tilt-card">[ Photo 1 — venue / setup ]</div>
-      <div class="gallery-slot tilt-card">[ Photo 2 — during the session ]</div>
-      <div class="gallery-slot tilt-card">[ Photo 3 — Q&amp;A moment ]</div>
-      <div class="gallery-slot tilt-card">[ Photo 4 — group / feedback forms ]</div>
-    </div>
-    <p style="margin-top:20px;font-size:0.86rem;color:var(--ink-soft);max-width:600px;">Only use photos with explicit participant consent, and avoid close-ups of individuals who didn't agree to be photographed. A simple sign-in sheet with a consent checkbox covers this cleanly.</p>
-  </div>
-</section>
-
 <section id="allies">
   <div class="wrap reveal">
     <div class="section-head">
@@ -932,11 +942,56 @@
   </div>
 </section>
 
+<section id="community-data">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div>
+        <span class="section-num">09 — Survey Results &amp; Impact</span>
+        <h2>Our community data, visualized.</h2>
+      </div>
+      <p>Insights captured live from our anonymous survey on Breaking the Silence.</p>
+    </div>
+    <div class="dash-grid stagger-grid">
+      <div class="dash-card tilt-card">
+        <h3>TOTAL RESPONDENTS</h3>
+        <div class="dash-big-num" id="dashTotal">0</div>
+        <div class="dash-sub">Voices heard</div>
+        <div class="dash-bars" id="dashBars">
+          <div class="b" style="--h:35%;"></div><div class="b" style="--h:55%;"></div><div class="b" style="--h:40%;"></div><div class="b" style="--h:70%;"></div><div class="b" style="--h:60%;"></div>
+        </div>
+      </div>
+      <div class="dash-card tilt-card">
+        <h3>KEY DEMOGRAPHICS</h3>
+        <div class="dash-pie-wrap"><div class="dash-pie" id="dashPie"></div></div>
+        <div class="dash-legend" id="dashLegend"></div>
+      </div>
+      <div class="dash-card tilt-card">
+        <h3>PREVALENCE INSIGHT</h3>
+        <div class="dash-donut-wrap">
+          <svg viewBox="0 0 120 120">
+            <circle class="track" cx="60" cy="60" r="50"/>
+            <circle class="fill" id="dashDonutFill" cx="60" cy="60" r="50"/>
+          </svg>
+          <div class="dash-donut-label" id="dashDonutLabel">0%</div>
+        </div>
+        <div class="dash-sub" id="dashDonutSub">of respondents have felt uncomfortable buying or carrying products publicly.</div>
+      </div>
+      <div class="dash-card tilt-card">
+        <h3>IMPACT HIGHLIGHT</h3>
+        <div class="dash-highlight" id="dashHighlight">
+          <p class="quote">Loading the most-believed myth on campus…</p>
+        </div>
+      </div>
+    </div>
+    <p class="dash-note">All survey data is anonymized and aggregated for community reporting. <a href="https://docs.google.com/spreadsheets/d/1clB3wZuROMjAy2kmjyT5M2kackRCJxx0kU3cWZic6yc/edit?usp=sharing" target="_blank" rel="noopener">View Full Data Report →</a></p>
+  </div>
+</section>
+
 <section id="resources">
   <div class="wrap reveal">
     <div class="section-head">
       <div>
-        <span class="section-num">09 — Get help</span>
+        <span class="section-num">10 — Get help</span>
         <h2>Where to learn more.</h2>
       </div>
       <p>Awareness information — not medical advice.</p>
@@ -971,7 +1026,7 @@
   <div class="wrap reveal">
     <div class="section-head">
       <div>
-        <span class="section-num">10 — Timeline: Menstrual Policy in India</span>
+        <span class="section-num">11 — Timeline: Menstrual Policy in India</span>
         <h2>How far the conversation has come.</h2>
       </div>
     </div>
@@ -989,7 +1044,7 @@
   <div class="wrap reveal">
     <div class="section-head">
       <div>
-        <span class="section-num">11 — Glossary</span>
+        <span class="section-num">12 — Glossary</span>
         <h2>Quick definitions.</h2>
       </div>
     </div>
@@ -1008,7 +1063,7 @@
   <div class="wrap reveal">
     <div class="section-head">
       <div>
-        <span class="section-num">12 — Frequently asked</span>
+        <span class="section-num">13 — Frequently asked</span>
         <h2>Starter questions, answered.</h2>
       </div>
       <p>Real anonymous submissions will be added here as they come in.</p>
@@ -1034,7 +1089,7 @@
   <div class="wrap reveal">
     <div class="section-head">
       <div>
-        <span class="section-num">13 — What we learned</span>
+        <span class="section-num">14 — What we learned</span>
         <h2>In our own words.</h2>
       </div>
     </div>
@@ -1050,7 +1105,7 @@
   <div class="wrap reveal">
     <div class="section-head">
       <div>
-        <span class="section-num">14 — Limitations</span>
+        <span class="section-num">15 — Limitations</span>
         <h2>Being honest about scope.</h2>
       </div>
     </div>
@@ -1088,7 +1143,9 @@
   const LIVE_CONFIG = {
     SHEET_ID: "1clB3wZuROMjAy2kmjyT5M2kackRCJxx0kU3cWZic6yc",
     GID: 0,
-    SCORE_COL: 1,        // "Score" column, format "22 / 30"
+    SCORE_COL: 1,          // "Score" column, format "22 / 30"
+    GENDER_COL: 5,         // "Gender" column
+    UNCOMFORTABLE_COL: 9,  // "Have you ever felt uncomfortable buying or carrying..." (Yes/No)
     QUIZ_START_COL: 12,  // first myth-quiz question column
     QUESTIONS: [
       "Periods shouldn't be discussed openly.",
@@ -1185,11 +1242,85 @@
       });
 
       statusEl.textContent = `Live from your Google Sheet · ${total} responses · updates every time this page loads`;
+
+      // ===== Populate the "Our community data, visualized" dashboard =====
+      populateDashboard(rows, total, top5);
     } catch (err) {
       statusEl.textContent = 'Something went wrong reading the data — use the button below to view results directly.';
       statusEl.classList.add('error');
       const pulse = document.querySelector('.live-pulse');
       if (pulse) pulse.style.display = 'none';
+    }
+  }
+
+  function populateDashboard(rows, total, top5) {
+    const dashTotalEl = document.getElementById('dashTotal');
+    if (!dashTotalEl) return; // dashboard not on this page
+
+    // Card 1: Total respondents
+    animateLiveNumber(dashTotalEl, total, false);
+
+    // Card 2: Gender demographics pie (GENDER_COL configured below)
+    const genderCounts = {};
+    rows.forEach(r => {
+      const cell = r.c[LIVE_CONFIG.GENDER_COL];
+      const val = cell && (cell.v ?? cell.f);
+      if (!val) return;
+      const key = String(val).trim();
+      genderCounts[key] = (genderCounts[key] || 0) + 1;
+    });
+    const genderEntries = Object.entries(genderCounts).sort((a, b) => b[1] - a[1]);
+    const genderTotal = genderEntries.reduce((s, [, c]) => s + c, 0);
+    const pieColors = ['var(--maroon)', 'var(--gold)', 'var(--sage)', 'var(--indigo)', 'var(--maroon-deep)'];
+    let acc = 0;
+    const gradientParts = genderEntries.map(([label, count], i) => {
+      const start = (acc / genderTotal) * 100;
+      acc += count;
+      const end = (acc / genderTotal) * 100;
+      return `${pieColors[i % pieColors.length]} ${start}% ${end}%`;
+    });
+    const pieEl = document.getElementById('dashPie');
+    if (pieEl && genderTotal > 0) {
+      setTimeout(() => { pieEl.style.background = `conic-gradient(${gradientParts.join(',')})`; }, 100);
+    }
+    const legendEl = document.getElementById('dashLegend');
+    if (legendEl) {
+      legendEl.innerHTML = genderEntries.map(([label, count], i) =>
+        `<span><i style="background:${pieColors[i % pieColors.length]}"></i>${label} ${Math.round((count / genderTotal) * 100)}%</span>`
+      ).join('');
+    }
+
+    // Card 3: Prevalence donut (UNCOMFORTABLE_COL configured below) — % who answered "Yes"
+    let yesCount = 0, uncAnswered = 0;
+    rows.forEach(r => {
+      const cell = r.c[LIVE_CONFIG.UNCOMFORTABLE_COL];
+      const val = cell && (cell.v ?? cell.f);
+      if (val === null || val === undefined || val === '') return;
+      uncAnswered++;
+      if (String(val).trim().toLowerCase() === 'yes') yesCount++;
+    });
+    const uncPct = uncAnswered ? Math.round((yesCount / uncAnswered) * 100) : 0;
+    const donutFill = document.getElementById('dashDonutFill');
+    const donutLabel = document.getElementById('dashDonutLabel');
+    if (donutFill) {
+      const circumference = 314; // 2*pi*50, matches stroke-dasharray
+      const offset = circumference - (uncPct / 100) * circumference;
+      donutFill.style.setProperty('--off', offset);
+    }
+    if (donutLabel) {
+      let n = 0;
+      const t = setInterval(() => {
+        n += 2;
+        if (n >= uncPct) { donutLabel.textContent = uncPct + '%'; clearInterval(t); }
+        else { donutLabel.textContent = n + '%'; }
+      }, 20);
+    }
+
+    // Card 4: Impact highlight — the single most-believed myth
+    const highlightEl = document.getElementById('dashHighlight');
+    if (highlightEl && top5 && top5.length > 0) {
+      const top = top5[0];
+      highlightEl.innerHTML = `<p class="quote"><span class="quote-pct">${top.believedPct}%</span> of respondents still believe: “${top.label}”</p>`;
     }
   }
 
